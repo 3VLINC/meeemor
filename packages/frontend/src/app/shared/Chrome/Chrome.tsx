@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { Navigation } from '../../components/Home/components/Navigation';
+import { Navigation } from './components/Navigation';
 
 const Root = styled.div`
   height: 100vh;

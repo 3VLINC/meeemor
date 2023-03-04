@@ -44,6 +44,10 @@ export function App() {
       <GlobalStyles
         styles={{
           body: { backgroundColor: '#006683' },
+          a: {
+            color: '#FFF',
+            textDecoration: 'none',
+          },
         }}
       />
       <Config>

@@ -1,4 +1,5 @@
 import { Web3Button } from '@web3modal/react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAccount } from 'wagmi';
 import { Chrome } from '../../shared/Chrome/Chrome';
@@ -35,10 +36,19 @@ const Title = styled.h1`
   margin: 0;
 `;
 
+const OrCreate = styled(Link)`
+  margin-top: 3rem;
+`;
+
 export const Home: React.FC = () => {
   const { isConnected } = useAccount();
 
-  let button: JSX.Element | null = <FindEvent />;
+  let button: JSX.Element | null = (
+    <>
+      <FindEvent />
+      <OrCreate to="/create">or create a new event</OrCreate>
+    </>
+  );
 
   if (!isConnected) {
     button = <Web3Button label="Get Started" />;

@@ -1,9 +1,10 @@
-import { createTheme, Theme } from '@mui/material';
+import { createTheme } from '@mui/material';
 
 export const theme = createTheme({
   typography: {
     fontFamily: '"Exo 2", Arial',
   },
+
   components: {
     MuiAutocomplete: {
       styleOverrides: {
