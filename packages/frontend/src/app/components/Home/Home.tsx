@@ -40,18 +40,30 @@ const OrCreate = styled(Link)`
   margin-top: 3rem;
 `;
 
+const Stream = styled.div``;
+
+const ForCreators = styled.div``;
+const ForOrganizers = styled.div``;
+
 export const Home: React.FC = () => {
   const { isConnected } = useAccount();
 
-  let button: JSX.Element | null = (
-    <>
-      <FindEvent />
-      <OrCreate to="/create">or create a new event</OrCreate>
-    </>
+  let content: JSX.Element | null = (
+    <Stream>
+      <ForCreators>
+        <h2>Meme makers and Attendees</h2>
+        <p>Choose a poap from your wallet to vote and submit memes.</p>
+        <FindEvent />
+      </ForCreators>
+      <ForOrganizers>
+        <h2>For Organizers</h2>
+        <OrCreate to="/create">Post a meme bounty for your next event</OrCreate>
+      </ForOrganizers>
+    </Stream>
   );
 
   if (!isConnected) {
-    button = <Web3Button label="Get Started" />;
+    content = <Web3Button label="Get Started" />;
   }
 
   return (
@@ -61,10 +73,7 @@ export const Home: React.FC = () => {
           <Flag>
             <Title>MEEEMOR</Title>
           </Flag>
-          <Description>
-            Incentivize meme creation at your event with MEEEMOR.
-          </Description>
-          {button}
+          {content}
         </Inside>
       </Root>
     </Chrome>
