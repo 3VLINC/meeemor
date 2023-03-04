@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 1000 1000" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M0 1.84265e-13L1000 1.84265e-13L1000 1000L0 1000L0 1.84265e-13Z" id="Fill"/>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="1000" width="1000" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Layer-1">
+<path d="M0 1.74547e-13L111.101 1.74547e-13L111.101 1000L0 1000L0 1.74547e-13Z" fill="#facef0" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M222.201 0L333.302 0L333.302 1000L222.201 1000L222.201 0Z" fill="#facef0" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M444.45 0L555.55 0L555.55 1000L444.45 1000L444.45 0Z" fill="#facef0" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M666.651 4.54747e-13L777.751 4.54747e-13L777.751 1000L666.651 1000L666.651 4.54747e-13Z" fill="#facef0" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M111.101 0L222.201 0L222.201 1000L111.101 1000L111.101 0Z" fill="#ffe6fa" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M333.302-2.84217e-13L444.402-2.84217e-13L444.402 1000L333.302 1000L333.302-2.84217e-13Z" fill="#ffe6fa" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M555.55 1.74083e-13L666.651 1.74083e-13L666.651 1000L555.55 1000L555.55 1.74083e-13Z" fill="#ffe6fa" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M777.751 0L888.852 0L888.852 1000L777.751 1000L777.751 0Z" fill="#ffe6fa" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M-9.09495e-13 4.54747e-13L1000 4.54747e-13L1000 1000L-9.09495e-13 1000L-9.09495e-13 4.54747e-13Z" fill="#38907a" fill-rule="nonzero" opacity="1" stroke="none"/>
+<g opacity="1">
+<mask height="1000" id="StrokeMask" maskUnits="userSpaceOnUse" width="1000" x="0" y="1.84265e-13">
+<rect fill="#000000" height="1000" stroke="none" width="1000" x="0" y="1.84265e-13"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#ffffff" stroke-linecap="square" stroke-linejoin="round" stroke-opacity="0.333333" stroke-width="55.7719" xlink:href="#Fill"/>
+</g>
+</g>
+</svg>

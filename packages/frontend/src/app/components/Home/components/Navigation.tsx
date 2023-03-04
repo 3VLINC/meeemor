@@ -2,15 +2,28 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Web3Button } from '@web3modal/react';
 
-const Root = styled.nav``;
+const Root = styled.nav`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
 const Nav = styled.ul`
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   flex-direction: row;
   list-style: none;
 `;
 
 const NavItem = styled.li`
   padding: 15px;
+  color: #fff;
+`;
+
+const StyledLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
 `;
 
 export const Navigation = () => {
@@ -18,13 +31,7 @@ export const Navigation = () => {
     <Root>
       <Nav>
         <NavItem>
-          <Link to="/">Home</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/events">All Events</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/create">Create</Link>
+          <StyledLink to="/">Home</StyledLink>
         </NavItem>
         <NavItem>
           <Web3Button label="Connect" />

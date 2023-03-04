@@ -19,7 +19,11 @@ export const FindEvent = () => {
       options={myActiveEvents}
       onChange={handleSelect}
       renderInput={(params) => (
-        <TextField {...params} label="Select an event" />
+        <TextField
+          {...params}
+          InputLabelProps={{ shrink: false }}
+          label="Select your event POAP"
+        />
       )}
     />
   );
