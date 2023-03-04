@@ -24,20 +24,6 @@
           "codeCoverage": true
         }
       }
-    },
-    "create:subgraph:poap": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npm run create -- 3VLINC/poap-w3q-subgraph -g http://localhost:8020 ",
-        "cwd": "./node_modules/poap-w3q-subgraph"
-      }
-    },
-    "deploy:subgraph:poap": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npm run deploy -- 3VLINC/poap-w3q-subgraph --ipfs http://localhost:5001 --node http://localhost:8020 --version-label 0.1.0",
-        "cwd": "./node_modules/poap-w3q-subgraph"
-      }
     }
   },
   "tags": []

@@ -19,7 +19,7 @@ services:
       ipfs: 'ipfs:5001'
       ethereum: 'mainnet:https://galileo.web3q.io:8545'
       RUST_LOG: info
-      GRAPH_LOG: trace
+      GRAPH_LOG: debug
       ETHEREUM_REORG_THRESHOLD: 0
   ipfs:
     image: ipfs/go-ipfs

@@ -12,6 +12,13 @@ While NFT artists can easily become famous, meme creators are often overlooked, 
 
 Meeemor is an app that is built on POAP. 
 
+# Getting Started
+1. Run `nvm use 14.18.0`
+1. Run `npm install`
+1. Run `docker-compose up`
+1. Run `nx create:subgraph:poap meeemor-subgraph`
+1. Run `nx deploy:subgraph:poap meeemor-subgraph`
+
 
 # Challenges
 - Wallet connect buffer not defined version compatibility
