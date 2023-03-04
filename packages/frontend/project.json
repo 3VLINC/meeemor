@@ -47,12 +47,20 @@
         }
       }
     },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "apollo client:codegen --config ./apollo.config.js --globalTypesFile ./src/types/globalTypes.ts --target typescript",
+        "cwd": "./packages/frontend"
+      }
+    },
     "serve": {
       "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "frontend:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "packages/frontend/proxy.conf.json"
       },
       "configurations": {
         "development": {

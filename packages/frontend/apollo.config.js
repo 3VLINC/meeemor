@@ -1,8 +1,8 @@
 module.exports = {
   client: {
     service: {
-      name: 'The Graph - eip721-subgraph',
-      url: 'http://localhost:4200/api/subgraphs/name/wighawag/eip721-subgraph',
+      name: 'Poap W3Q Subgraph',
+      url: 'http://localhost:4200/api/subgraphs/name/3VLINC/poap-w3q-subgraph',
       // optional headers
       headers: {},
     },

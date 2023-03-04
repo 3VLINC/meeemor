@@ -13,7 +13,7 @@ import { GlobalStyles } from '@mui/material';
 import { useAccount } from 'wagmi';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4200/api/subgraphs/name/wighawag/eip721-subgraph',
+  uri: 'http://localhost:4200/api/subgraphs/name/3VLINC/poap-w3q-subgraph',
   cache: new InMemoryCache(),
 });
 
