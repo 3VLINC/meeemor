@@ -12,7 +12,6 @@ const initialValues: CreateProps = {
 export const CreateForm = () => {
   const handleSubmit = (values: CreateProps) => {
     //TODO: submit to contract
-    console.log(values);
   };
 
   return (

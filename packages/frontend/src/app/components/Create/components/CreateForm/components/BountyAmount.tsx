@@ -1,21 +1,17 @@
 import { FieldProps } from 'formik';
 import { Slider } from '@mui/material';
 import { CreateProps } from '../CreateForm.interface';
-import { ethers } from 'ethers';
 import { useConfig } from '../../../../../shared/Config/Config';
 import { isArray } from 'lodash';
 export const BountyAmount: React.FC<FieldProps<CreateProps>> = ({
-  field: { name, value },
+  field: { name },
   form: { setFieldValue },
 }) => {
   const {
     bounty: { min, max, stepIncrement, defaultValue },
   } = useConfig();
-  console.log(min, max);
-  // console.log(ethers.formatEther(value.bounty || 0));
 
   const handleChange = (event: Event, value: number | number[]) => {
-    console.log('value', value);
     if (isArray(value)) {
       setFieldValue(name, value[0]);
     } else {
@@ -36,7 +32,7 @@ export const BountyAmount: React.FC<FieldProps<CreateProps>> = ({
       onChange={handleChange}
       min={min}
       max={max}
-      valueLabelFormat={(value) => `${numberToTwoDecimals(value)} ETH`}
+      valueLabelFormat={(value) => `${numberToTwoDecimals(value)}Ξ`}
     />
   );
 };
