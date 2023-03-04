@@ -12,17 +12,31 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "nx:run-commands",
       "options": {
-        "jestConfig": "packages/backend/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "command": "hardhat test",
+        "cwd": "./packages/backend"
+      }
+    },
+    "compile": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hardhat compile",
+        "cwd": "./packages/backend"
+      }
+    },
+    "coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hardhat coverage",
+        "cwd": "./packages/backend"
+      }
+    },
+    "deploy:contracts": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hardhat run ./scripts/deploy.ts --network dev",
+        "cwd": "./packages/backend"
       }
     }
   },

@@ -39,3 +39,4 @@ testem.log
 Thumbs.db
 
 .openzeppelin/.session
+.env.local
