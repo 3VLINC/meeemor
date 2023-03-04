@@ -11,8 +11,8 @@ interface ConfigProps {
 
 const initial: ConfigProps = {
   bounty: {
-    min: 0,
-    max: 50,
+    min: 1,
+    max: 20,
     stepIncrement: 0.5,
     defaultValue: 3,
   },

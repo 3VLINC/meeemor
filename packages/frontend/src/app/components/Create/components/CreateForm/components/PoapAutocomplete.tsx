@@ -21,7 +21,6 @@ export const PoapAutocomplete: React.FC<FieldProps<CreateProps>> = ({
   field: { name },
   form: { setFieldValue },
 }) => {
-  console.log('name', name);
   const handleSelect = (
     _: React.SyntheticEvent,
     selectedItem: Option | null
