@@ -1,3 +1,9 @@
+import { Chrome } from '../../shared/Chrome/Chrome';
+
 export const Event = () => {
-  return <p>Event</p>
-}
+  return (
+    <Chrome>
+      <p>Event</p>
+    </Chrome>
+  );
+};

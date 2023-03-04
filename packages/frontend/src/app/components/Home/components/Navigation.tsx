@@ -20,7 +20,10 @@ export const Navigation = () => {
           <Link to="/">Home</Link>
         </NavItem>
         <NavItem>
-          <Link to="/create">Events</Link>
+          <Link to="/events">Events</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/create">Create</Link>
         </NavItem>
       </Nav>
     </Root>
