@@ -23,6 +23,8 @@ export const BountyAmount: React.FC<FieldProps<CreateProps>> = ({
     return value.toFixed(2);
   };
 
+  const formatValueLabel = (value: number) => `${numberToTwoDecimals(value)}Ξ`;
+
   return (
     <Slider
       aria-label="Bounty Amount"
@@ -32,7 +34,7 @@ export const BountyAmount: React.FC<FieldProps<CreateProps>> = ({
       onChange={handleChange}
       min={min}
       max={max}
-      valueLabelFormat={(value) => `${numberToTwoDecimals(value)}Ξ`}
+      valueLabelFormat={formatValueLabel}
     />
   );
 };

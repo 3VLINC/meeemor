@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Web3Button } from '@web3modal/react';
 
 const Root = styled.nav``;
 const Nav = styled.ul`
@@ -24,6 +25,9 @@ export const Navigation = () => {
         </NavItem>
         <NavItem>
           <Link to="/create">Create</Link>
+        </NavItem>
+        <NavItem>
+          <Web3Button label="Connect" />
         </NavItem>
       </Nav>
     </Root>

@@ -1,6 +1,5 @@
 import { TextField, Autocomplete } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate, redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Option {
   id: number;
@@ -34,7 +33,6 @@ export const FindEvent = () => {
     _: React.SyntheticEvent,
     selectedItem: Option | null
   ) => {
-    console.log(selectedItem);
     if (!selectedItem) return;
     navigate(`/event/${selectedItem.id}`);
   };
