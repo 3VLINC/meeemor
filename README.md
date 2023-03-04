@@ -18,6 +18,7 @@ Meeemor is an app that is built on POAP.
 1. Run `docker-compose up`
 1. Run `nx create:subgraph:poap meeemor-subgraph`
 1. Run `nx deploy:subgraph:poap meeemor-subgraph`
+1. Run `nx serve frontend`
 
 
 # Challenges
