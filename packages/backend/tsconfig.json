@@ -1,16 +1,18 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "target": "es2018",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "declaration": true
   },
   "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+  "include": [
+    "**/*",
+    "../../__legacy__contracts/test/utils",
+    "../../__legacy__/deploy-legacy.ts"
   ]
 }
