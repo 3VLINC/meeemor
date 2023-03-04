@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Home } from './components/Home/Home';
 import { Events } from './components/Events/Events';
 import { Event } from './components/Event/Event';
@@ -10,6 +10,7 @@ import { Mocks } from './shared/Mocks/Mocks';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import { GlobalStyles } from '@mui/material';
+import { useAccount } from 'wagmi';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4200/api/subgraphs/name/wighawag/eip721-subgraph',
@@ -20,6 +21,23 @@ const StyledApp = styled.div`
   // Your style here
 `;
 
+const AppRoutes = () => {
+  const { isConnected } = useAccount();
+
+  return isConnected ? (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/events" element={<Events />} />
+      <Route path="/event/:eventId" element={<Event />} />
+      <Route path="/create" element={<Create />} />
+    </Routes>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  );
+};
 export function App() {
   return (
     <StyledApp>
@@ -32,12 +50,7 @@ export function App() {
         <Web3>
           <ApolloProvider client={client}>
             <Mocks>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/event/:eventId" element={<Event />} />
-                <Route path="/create" element={<Create />} />
-              </Routes>
+              <AppRoutes />
             </Mocks>
           </ApolloProvider>
         </Web3>

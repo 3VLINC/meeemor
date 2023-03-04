@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Web3Button } from '@web3modal/react';
+import { useAccount } from 'wagmi';
 
 const Root = styled.nav`
   display: flex;
@@ -27,15 +28,15 @@ const StyledLink = styled(Link)`
 `;
 
 export const Navigation = () => {
+  const { isConnected } = useAccount();
+
   return (
     <Root>
       <Nav>
         <NavItem>
           <StyledLink to="/">Home</StyledLink>
         </NavItem>
-        <NavItem>
-          <Web3Button label="Connect" />
-        </NavItem>
+        <NavItem>{isConnected && <Web3Button label="Connect" />}</NavItem>
       </Nav>
     </Root>
   );
