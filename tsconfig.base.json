@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@meeemor/backend": ["packages/backend/src/index.ts"]
+      "@meeemor/backend": ["packages/backend/src/index.ts"],
+      "@meeemor/meeemor-subgraph": ["packages/meeemor-subgraph/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

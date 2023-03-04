@@ -2,7 +2,9 @@
   "name": "meeemor",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "graph": "graph"
+  },
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.9",
@@ -21,6 +23,7 @@
     "fuzzy": "^0.1.3",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
+    "poap-w3q-subgraph": "git+https://github.com/3VLINC/poap-subgraph-w3q.git",
     "process": "^0.11.10",
     "react": "18.2.0",
     "react-app-rewired": "^2.2.1",
@@ -29,6 +32,7 @@
     "react-is": "18.2.0",
     "react-router-dom": "6.8.1",
     "styled-components": "^5.3.6",
+    "subgraph-deploy": "0.0.7",
     "tslib": "^2.3.0",
     "util": "^0.12.5",
     "wagmi": "^0.11.7"

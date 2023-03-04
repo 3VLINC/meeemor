@@ -1,5 +1,9 @@
 # Meeemor
 
+Memes are our best tool for maintaining alignment within decentralized communities.
+
+B
+
 Meeemor is a web3 dapp that fosters community through memes.
 
 We think that meme artists contribute to our shared understanding of the world.
