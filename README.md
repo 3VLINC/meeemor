@@ -24,3 +24,31 @@ Meeemor is an app that is built on POAP.
 # Challenges
 - Wallet connect buffer not defined version compatibility
 - Incompatibility of wallet connect and webpack version bundled with @nrwl. Had to inject node dependencies into webpack
+
+
+# Next Steps
+- Deploy script for the contract
+- Write out contracts addresses to an javascript file:
+
+```
+const meemoreAddress = '';
+const poapAddress = '';
+```
+
+Backend
+- Subgraph for Meeemor
+- Creating an event
+    - Create poap
+    - Register with Meeemor and set the bounty
+- Submit a meme
+- Vote
+- Trigger the award event.
+- Claim button for winners
+
+
+UI
+- Creating an event UI linked to backend
+- Display of events and memes and votes "blind voting"
+- Event admin award trigger page
+- Claim page
+

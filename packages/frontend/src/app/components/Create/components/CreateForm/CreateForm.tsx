@@ -60,7 +60,7 @@ const Inside: React.FC<FormikProps<CreateProps>> = ({ values }) => {
 
   const handleSubmit = () => {
     // TODO: send transaction
-    // sendTransaction?.();
+    sendTransaction?.();
   };
 
   return (
