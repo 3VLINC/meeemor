@@ -37,7 +37,7 @@ contract MEEEMORDeploy is Ownable {
         address indexed addr,
         uint256 eventId,
         uint256 tokenId
-    )
+    );
 
     constructor(address addr) Ownable() {
         poapAddress = addr;
