@@ -20,6 +20,10 @@ Meeemor is an app that is built on POAP.
 1. Run `nx deploy:subgraph:poap meeemor-subgraph`
 1. Run `nx serve frontend`
 
+# Deploying
+1. Set your private key in .env.local `PRIVATE_KEY=<INSERT_KEY_HERE>`
+1. Run `nx deploy backend`
+
 
 # Challenges
 - Wallet connect buffer not defined version compatibility
