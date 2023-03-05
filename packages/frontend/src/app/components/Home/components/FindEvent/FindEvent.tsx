@@ -2,7 +2,7 @@ import { TextField, Autocomplete } from '@mui/material';
 import { Option } from '../../../../app.interface';
 import { useNavigate } from 'react-router-dom';
 import { useAccount } from 'wagmi';
-import { useAllEvents } from '../../../../hooks/getAllEvents';
+import { useAllEvents } from '../../../../hooks/useAllEvents';
 import { useMocks } from '../../../../shared/Mocks/Mocks';
 
 export const FindEvent = () => {

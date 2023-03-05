@@ -1,10 +1,9 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Chrome } from '../../shared/Chrome/Chrome';
-import { useMocks } from '../../shared/Mocks/Mocks';
 import { MemeList } from './components/components/MemeList/MemeList';
 import { SubmitForm } from './components/SubmitForm';
-
+import { useEvent } from '../../hooks/useEvent';
 const Wrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,9 +19,9 @@ const FormWrap = styled.div`
 export const Event = () => {
   const { eventId = '' } = useParams<{ eventId: string }>();
 
-  const { myActiveEvents } = useMocks();
+  const { data } = useEvent(parseInt(eventId));
 
-  const currentEvent = myActiveEvents.find((event) => event.id === eventId);
+  const currentEvent = data?.token;
 
   if (!currentEvent) {
     return null;
