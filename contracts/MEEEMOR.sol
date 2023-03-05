@@ -15,7 +15,6 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     Counters.Counter private _tokenIdCounter;
 
     address private poapAddress;
-    uint256 private eventId;
     uint256 private duration;
     uint256 private bountyAmount;
     uint256 private winnerTokenId;
@@ -41,9 +40,8 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     event MemeCreated(address indexed addr, uint256 tokenId);
 
-    constructor(address _poapAddr, uint256 _eventId) payable ERC721("MEEEMOR", "MMR"){
+    constructor(address _poapAddr) payable ERC721("MEEEMOR", "MMR"){
         require(msg.value >=1 ether, "Bounty amount must be greater than 1 EH");
-        eventId = _eventId;
         poapAddress = _poapAddr;
         bountyAmount = msg.value;
     }
@@ -68,7 +66,7 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         }
     }
 
-    function endBouty() external onlyOwner{
+    function endBounty() external onlyOwner{
         require(timerStarted, "Timer not started");
         require(block.timestamp >= endTime, "Timer not ended");
 
@@ -103,15 +101,16 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return poapAddress;
     } 
 
-    function createMeme(string memory uri) public {
+    function createMeme(string memory uri) public returns (uint256) {
         require(checkEligibility(msg.sender), "Mint your POAP token first");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(address(this), tokenId);
         _setTokenURI(tokenId, uri);
 
-    }
+        return tokenId;
 
+    }
 
     function checkEligibility(address _to) internal view returns (bool isEligible){
 
@@ -175,7 +174,7 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         internal
         override(ERC721, ERC721Enumerable)
     {
-        super._beforeTokenTransfer(from, to, tokenId, uint256 batchSize);
+        super._beforeTokenTransfer(from, to, tokenId, batchSize);
     }
 
     function _afterTokenTransfer(address from, address to, uint256 tokenId)
