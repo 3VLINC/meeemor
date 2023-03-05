@@ -1,24 +1,22 @@
-import styled from 'styled-components';
 import { useMocks } from '../../../../../shared/Mocks/Mocks';
+import { Meme } from './components/Meme';
+import styled from 'styled-components';
 
-const Image = styled.img`
-  height: 120px;
-  width: auto;
-  display: block;
+const Scroll = styled.div`
+  overflow-y: scroll;
+  height: 100%;
 `;
+
 export const MemeList = ({ eventId }: { eventId: string }) => {
   const { memes } = useMocks();
 
   const memesForEvent = memes(eventId);
 
   return (
-    <div>
+    <Scroll>
       {memesForEvent.map((meme) => (
-        <div key={meme.id}>
-          <Image alt="" height="120px" width="auto" src={meme.image} />
-          <div>{meme.votes}</div>
-        </div>
+        <Meme key={meme.id} {...meme} />
       ))}
-    </div>
+    </Scroll>
   );
 };
