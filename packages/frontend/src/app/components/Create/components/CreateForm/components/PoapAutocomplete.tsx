@@ -1,17 +1,10 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { FieldProps } from 'formik';
+import { useAllEvents } from '../../../../../hooks/getAllEvents';
+import { useMocks } from '../../../../../shared/Mocks/Mocks';
+import { useAccount } from 'wagmi';
 import { CreateProps } from '../CreateForm.interface';
 
-const tempPoaps = [
-  {
-    id: 1,
-    label: 'Eth Denver 2023',
-  },
-  {
-    id: 2,
-    label: 'DevCon 2023',
-  },
-];
 interface Option {
   id: number;
   label: string;
@@ -21,6 +14,14 @@ export const PoapAutocomplete: React.FC<FieldProps<CreateProps>> = ({
   field: { name },
   form: { setFieldValue },
 }) => {
+  const { address } = useAccount();
+  const { data } = useAllEvents(address || '');
+  const { eventName } = useMocks();
+  const myActiveEvents = (data?.account?.tokens || []).map((token: any) => ({
+    id: token.id,
+    label: eventName(token.id),
+  }));
+
   const handleSelect = (
     _: React.SyntheticEvent,
     selectedItem: Option | null
@@ -31,9 +32,15 @@ export const PoapAutocomplete: React.FC<FieldProps<CreateProps>> = ({
 
   return (
     <Autocomplete
-      options={tempPoaps}
+      options={myActiveEvents}
       onChange={handleSelect}
-      renderInput={(params) => <TextField {...params} label="Select a POAP" />}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          InputLabelProps={{ shrink: false }}
+          label="Select your event POAP"
+        />
+      )}
     />
   );
 };

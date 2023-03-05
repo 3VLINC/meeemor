@@ -39,6 +39,7 @@
     "styled-components": "^5.3.6",
     "subgraph-deploy": "0.0.7",
     "tslib": "^2.3.0",
+    "use-debounce": "^9.0.3",
     "util": "^0.12.5",
     "wagmi": "^0.11.7"
   },

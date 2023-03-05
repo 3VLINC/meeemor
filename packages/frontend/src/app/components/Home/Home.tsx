@@ -24,10 +24,6 @@ const Inside = styled.div`
 const Flag = styled.div`
   margin-bottom: 3rem;
 `;
-const Description = styled.div`
-  font-size: 1.4rem;
-  margin-bottom: 3rem;
-`;
 
 const Title = styled.h1`
   font-size: 3rem;

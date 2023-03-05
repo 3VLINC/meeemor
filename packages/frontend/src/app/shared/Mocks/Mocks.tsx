@@ -1,6 +1,7 @@
 import { intersectionBy } from 'lodash';
 import { createContext, PropsWithChildren, useContext } from 'react';
 import { Option } from '../../app.interface';
+import { eventNames } from './eventNames';
 import { oneDoesNot } from './images/oneDoesNot';
 
 interface MocksProps {
@@ -8,6 +9,7 @@ interface MocksProps {
   myEvents: Option[];
   myActiveEvents: Option[];
   myPoaps: Option[];
+  eventName: (eventId: number) => string;
   memes: (eventId: string) => Array<{
     id: string;
     votes: number;
@@ -38,6 +40,7 @@ const initial: Omit<MocksProps, 'myActiveEvents'> = {
       label: 'SxSW',
     },
   ],
+  eventName: (id: number) => eventNames[id] || '',
   myEvents: [
     {
       id: '1',

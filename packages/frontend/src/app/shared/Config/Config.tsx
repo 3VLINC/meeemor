@@ -7,6 +7,14 @@ interface ConfigProps {
     stepIncrement: number;
     defaultValue: number;
   };
+  contracts: {
+    meeemor: {
+      address: string;
+    };
+    poap: {
+      address: string;
+    };
+  };
 }
 
 const initial: ConfigProps = {
@@ -15,6 +23,14 @@ const initial: ConfigProps = {
     max: 20,
     stepIncrement: 0.5,
     defaultValue: 3,
+  },
+  contracts: {
+    meeemor: {
+      address: '',
+    },
+    poap: {
+      address: '',
+    },
   },
 };
 
