@@ -7,13 +7,7 @@ import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract MEEEMOR is
-    ERC721,
-    ERC721Enumerable,
-    ERC721URIStorage,
-    Pausable,
-    Ownable
-{
+contract Poap is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable {
     event EventToken(uint256 eventId, uint256 tokenId);
     // EventId for each token
     mapping(uint256 => uint256) private _tokenEvent;

@@ -32,10 +32,10 @@
         "cwd": "./packages/backend"
       }
     },
-    "deploy:contracts": {
+    "deploy": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "hardhat run ./scripts/deploy.ts --network dev",
+        "command": "hardhat run ./scripts/deploy.ts --network w3q",
         "cwd": "./packages/backend"
       }
     }
