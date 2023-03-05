@@ -31,3 +31,11 @@ type Transfer @entity {
   transaction: Bytes!
   timestamp: BigInt!
 }
+
+type MeeemorEvent @entity {
+  id: ID!
+  name: String!
+  bounty: BigInt!
+  event: Event!
+  created: BigInt!
+}

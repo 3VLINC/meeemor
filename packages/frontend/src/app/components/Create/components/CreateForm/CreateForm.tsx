@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { useConfig } from '../../../../shared/Config/Config';
 import { usePrepareSendTransaction, useSendTransaction } from 'wagmi';
 import { ethers } from 'ethers';
+import { useDebounce } from 'use-debounce';
 
 const StyledForm = styled(Form)`
   width: 100%;
@@ -76,6 +77,3 @@ const Inside: React.FC<FormikProps<CreateProps>> = ({ values }) => {
     </StyledForm>
   );
 };
-function useDebounce(amount: any, arg1: number): [any] {
-  throw new Error('Function not implemented.');
-}

@@ -25,14 +25,22 @@
         }
       }
     },
-    "create:subgraph:poap": {
+    "create:subgraph": {
       "executor": "nx:run-commands",
       "options": {
         "command": "npm run graph create -- 3VLINC/poap-w3q-subgraph -g http://localhost:8020 ",
         "cwd": "./packages/meeemor-subgraph"
       }
     },
-    "deploy:subgraph:poap": {
+    "codegen:subgraph": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "command": "npm run graph codegen ./packages/meeemor-subgraph/subgraph.yaml -- --output-dir ./packages/meeemor-subgraph/generated",
+        "cwd": "./packages/meeemor-subgraph"
+      }
+    },
+    "deploy:subgraph": {
       "executor": "nx:run-commands",
       "options": {
         "parallel": false,
