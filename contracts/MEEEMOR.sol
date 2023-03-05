@@ -177,11 +177,11 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         super._beforeTokenTransfer(from, to, tokenId, batchSize);
     }
 
-    function _afterTokenTransfer(address from, address to, uint256 tokenId)
+    function _afterTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
         override(ERC721)
     {
-        super._afterTokenTransfer(from, to, tokenId);
+        super._afterTokenTransfer(from, to, tokenId, batchSize);
     }
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
