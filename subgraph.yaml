@@ -1,0 +1,4 @@
+
+> meeemor@0.0.0 mustache /Users/danimbrogno/Repositories/meeemor
+> mustache "{ test:one}" "./packages/meeemor-subgraph/subgraph.template.yaml"
+

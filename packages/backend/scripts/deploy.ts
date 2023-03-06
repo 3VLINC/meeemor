@@ -18,16 +18,15 @@ async function main() {
     .connect(contractOwner)
     .deploy(poapInstance.address);
 
-  const stream = createWriteStream(
-    resolve('../frontend/src/environments/contracts.ts')
-  );
-  stream.write(`
-  // DO NOT EDIT: This file is auto-generated
+  const stream = createWriteStream(resolve('../../contracts.w3q.json'));
 
-  export const contracts = {
-    meeemorDeploy: '${meeemorDeployInstance.address}',
-    poap: '${poapInstance.address}',
-  };`);
+  stream.write(
+    JSON.stringify({
+      meeemorDeploy: meeemorDeployInstance.address,
+      poap: poapInstance.address,
+    })
+  );
+
   stream.close();
   console.log('MeeemorDeploy deployed to:', meeemorDeployInstance.address);
   console.log('Poap deployed to:', poapInstance.address);

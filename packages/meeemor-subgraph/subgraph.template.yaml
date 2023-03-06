@@ -8,7 +8,7 @@ dataSources:
     name: Poap
     network: mainnet
     source:
-      address: "0xFe335aD053f72dd084C43594AED8922a1B841d47"
+      address: "{{ poap }}"
       abi: Poap
       startBlock: 5453900
     mapping:
@@ -31,7 +31,7 @@ dataSources:
     name: MeeemorDeployer
     network: mainnet
     source:
-      address: "0xFe335aD053f72dd084C43594AED8922a1B841d47" # TODO: REplace
+      address: "{{ meeemorDeploy }}"
       abi: MEEEMORDeploy
       startBlock: 5453900
     mapping:
