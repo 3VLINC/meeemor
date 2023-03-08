@@ -1,9 +1,9 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { FieldProps } from 'formik';
-import { useAllEvents } from '../../../../../hooks/useAllEvents';
-import { useMocks } from '../../../../../shared/Mocks/Mocks';
+import { useAllEvents } from '../../../../../../../hooks/useAllEvents';
+import { useMocks } from '../../../../../../../shared/Mocks/Mocks';
 import { useAccount } from 'wagmi';
-import { CreateProps } from '../CreateForm.interface';
+import { CreateProps } from '../../../CreateForm.interface';
 
 interface Option {
   id: number;

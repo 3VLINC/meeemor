@@ -8,28 +8,21 @@ async function main() {
   const meeemorDeployContractFactory = await ethers.getContractFactory(
     'MEEEMORDeploy'
   );
-  const poapContractFactory = await ethers.getContractFactory('Poap');
-
-  const poapInstance = await poapContractFactory
-    .connect(contractOwner)
-    .deploy();
 
   const meeemorDeployInstance = await meeemorDeployContractFactory
     .connect(contractOwner)
-    .deploy(poapInstance.address);
+    .deploy();
 
   const stream = createWriteStream(resolve('../../contracts.w3q.json'));
 
   stream.write(
     JSON.stringify({
       meeemorDeploy: meeemorDeployInstance.address,
-      poap: poapInstance.address,
     })
   );
 
   stream.close();
   console.log('MeeemorDeploy deployed to:', meeemorDeployInstance.address);
-  console.log('Poap deployed to:', poapInstance.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

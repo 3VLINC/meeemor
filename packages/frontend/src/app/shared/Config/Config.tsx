@@ -1,4 +1,6 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
+import { MeeemorDeployAbi } from '@meeemor/backend';
+import contracts from '../../../../../../contracts.w3q.json';
 
 interface ConfigProps {
   bounty: {
@@ -9,10 +11,8 @@ interface ConfigProps {
   };
   contracts: {
     meeemor: {
-      address: string;
-    };
-    poap: {
-      address: string;
+      address: `0x${string}`;
+      abi: (typeof MeeemorDeployAbi)['abi'];
     };
   };
 }
@@ -26,10 +26,8 @@ const initial: ConfigProps = {
   },
   contracts: {
     meeemor: {
-      address: '',
-    },
-    poap: {
-      address: '',
+      address: contracts.meeemorDeploy as `0x${string}`,
+      abi: MeeemorDeployAbi.abi,
     },
   },
 };

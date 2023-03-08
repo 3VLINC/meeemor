@@ -1,13 +1,22 @@
-import { Button } from '@mui/material';
+import { Button, FormControlLabel, RadioGroup } from '@mui/material';
 import { Formik, Form, Field, FormikProps } from 'formik';
 import { BountyAmount } from './components/BountyAmount';
-import { PoapAutocomplete } from './components/PoapAutocomplete';
 import { CreateProps } from './CreateForm.interface';
 import styled from 'styled-components';
 import { useConfig } from '../../../../shared/Config/Config';
-import { usePrepareSendTransaction, useSendTransaction } from 'wagmi';
-import { ethers } from 'ethers';
+import {
+  useContractWrite,
+  usePrepareContractWrite,
+  usePrepareSendTransaction,
+  useSendTransaction,
+} from 'wagmi';
 import { useDebounce } from 'use-debounce';
+import { ExistingPoap } from './components/ExistingPoap/ExistingPoap';
+import { NewPoap } from './components/NewPoap';
+import { Mode } from './components/Mode';
+import { useMemo } from 'react';
+import { BigNumber, utils, constants } from 'ethers';
+import { parseEther } from 'ethers/lib/utils';
 
 const StyledForm = styled(Form)`
   width: 100%;
@@ -18,9 +27,20 @@ const StyledField = styled.div`
   margin: 2rem 0;
 `;
 const initialValues: CreateProps = {
+  mode: 'new',
   poapAddr: '',
   bounty: 0,
+  eventName: '',
 };
+
+const StyledRadioGroup = styled(RadioGroup)`
+  display: flex;
+  flex-direction: row;
+`;
+
+const StyledFormControlLabel = styled(FormControlLabel)`
+  flex: 1;
+`;
 
 export const CreateForm = () => {
   const {
@@ -44,34 +64,78 @@ export const CreateForm = () => {
   );
 };
 
-const Inside: React.FC<FormikProps<CreateProps>> = ({ values }) => {
-  const [debouncedValues] = useDebounce(values, 500);
+const Inside: React.FC<FormikProps<CreateProps>> = ({
+  values,
+  handleReset,
+}) => {
   const { contracts } = useConfig();
-  const { config } = usePrepareSendTransaction({
-    request: {
-      to: contracts.meeemor.address,
-      value: debouncedValues.bounty
-        ? ethers.utils.parseEther(debouncedValues.bounty.toString())
-        : undefined,
+
+  const debouncedEventName = useDebounce(values.eventName, 500);
+  const debouncedBounty = useDebounce(values.bounty, 500);
+
+  const ethStr = debouncedBounty[0].toString();
+  const bountyInGwei = useMemo(() => parseEther(ethStr), [ethStr]);
+  const name = debouncedEventName[0];
+  const eventName = useMemo(() => name, [name]);
+  const abi = contracts.meeemor.abi;
+
+  const { config } = usePrepareContractWrite({
+    address: contracts.meeemor.address,
+    abi,
+    functionName: 'initialize',
+    overrides: {
+      value: bountyInGwei,
+    },
+    args: [eventName],
+    enabled:
+      contracts.meeemor.address !== '0x' && eventName && bountyInGwei
+        ? true
+        : false,
+    onSettled: () => {
+      // handleReset();
     },
   });
-
-  const { isLoading, sendTransaction } = useSendTransaction(config);
-
+  console.log('rendering');
+  const { isLoading, write } = useContractWrite(config);
   const handleSubmit = () => {
-    // TODO: send transaction
-    sendTransaction?.();
+    console.log('submitting');
+    write?.();
   };
+  const modeFields =
+    values.mode === 'existing' ? <ExistingPoap /> : <NewPoap />;
 
   return (
     <StyledForm>
       <StyledField>
-        <Field name="poapAddr" component={PoapAutocomplete} />
+        <StyledRadioGroup>
+          <StyledFormControlLabel
+            control={
+              <Field type="radio" name="mode" value="new" component={Mode} />
+            }
+            label="New POAP"
+          />
+          <StyledFormControlLabel
+            control={
+              <Field
+                type="radio"
+                name="mode"
+                value="existing"
+                component={Mode}
+              />
+            }
+            label="Existing POAP"
+          />
+        </StyledRadioGroup>
       </StyledField>
+      <StyledField>{modeFields}</StyledField>
       <StyledField>
         <Field name="bounty" component={BountyAmount} />
       </StyledField>
-      <Button disabled={isLoading} type="submit" onSubmit={handleSubmit}>
+      <Button
+        disabled={isLoading || !write}
+        type="submit"
+        onSubmit={handleSubmit}
+      >
         Submit
       </Button>
     </StyledForm>

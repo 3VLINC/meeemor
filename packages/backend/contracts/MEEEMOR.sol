@@ -43,7 +43,7 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     constructor(address _poapAddr) payable ERC721('MEEEMOR', 'MMR') {
         require(
             msg.value >= 1 ether,
-            'Bounty amount must be greater than 1 EH'
+            'Bounty amount must be greater than 1 ETH'
         );
         poapAddress = _poapAddr;
         bountyAmount = msg.value;
