@@ -21,6 +21,13 @@ Meeemor is an app that is built on POAP.
 1. Run `nx deploy subgraph`
 1. Run `nx serve frontend`
 
+
+# Developing
+
+## Testing
+1. Use `nx test backend` to run tests on solidity contracts using the hardhat network. NOTE, uploading to ethStorage will not work in this environment.
+
+
 # Deploying
 1. Set your private key in .env.local `PRIVATE_KEY=<INSERT_KEY_HERE>`
 1. Run `nx deploy backend`
