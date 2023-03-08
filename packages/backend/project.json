@@ -35,7 +35,7 @@
     "deploy": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "hardhat run ./scripts/deploy.ts --network w3q",
+        "command": "hardhat run ./scripts/deploy.ts",
         "cwd": "./packages/backend"
       }
     }

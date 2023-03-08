@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat';
+import { ethers, network } from 'hardhat';
 import { createWriteStream } from 'fs';
 import { resolve } from 'path';
 
@@ -13,7 +13,9 @@ async function main() {
     .connect(contractOwner)
     .deploy();
 
-  const stream = createWriteStream(resolve('../../contracts.w3q.json'));
+  const stream = createWriteStream(
+    resolve(`../../contracts.${network.name}.json`)
+  );
 
   stream.write(
     JSON.stringify({

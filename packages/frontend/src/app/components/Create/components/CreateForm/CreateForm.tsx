@@ -13,7 +13,7 @@ import { useDebounce } from 'use-debounce';
 import { ExistingPoap } from './components/ExistingPoap/ExistingPoap';
 import { NewPoap } from './components/NewPoap';
 import { Mode } from './components/Mode';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { parseEther } from 'ethers/lib/utils';
 
 const StyledForm = styled(Form)`
