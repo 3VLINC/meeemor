@@ -17,8 +17,8 @@ Meeemor is an app that is built on POAP.
 1. Run `npm install`
 1. Run `docker-compose up`
 1. Create `contracts.w3q.json` in root with contract addresses `{"meeemorDeploy":"<ADDRESS>"}`
-1. Run `nx create:subgraph:poap meeemor-subgraph`
-1. Run `nx deploy:subgraph:poap meeemor-subgraph`
+1. Run `nx create subgraph`
+1. Run `nx deploy subgraph`
 1. Run `nx serve frontend`
 
 # Deploying

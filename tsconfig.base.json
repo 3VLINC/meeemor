@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@meeemor/backend": ["packages/backend/index.ts"],
-      "@meeemor/meeemor-subgraph": ["packages/meeemor-subgraph/src/index.ts"]
+      "@meeemor/subgraph": ["packages/subgraph/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

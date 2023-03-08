@@ -1,21 +1,21 @@
 {
-  "name": "meeemor-subgraph",
+  "name": "subgraph",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/meeemor-subgraph/src",
+  "sourceRoot": "packages/subgraph/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/meeemor-subgraph/**/*.ts"]
+        "lintFilePatterns": ["packages/subgraph/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/meeemor-subgraph/jest.config.ts",
+        "jestConfig": "packages/subgraph/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -29,15 +29,15 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "npm run graph create -- 3VLINC/poap-w3q-subgraph -g http://localhost:8020 ",
-        "cwd": "./packages/meeemor-subgraph"
+        "cwd": "./packages/subgraph"
       }
     },
     "codegen": {
       "executor": "nx:run-commands",
       "options": {
         "parallel": false,
-        "command": "npm run graph codegen ./packages/meeemor-subgraph/subgraph.yaml -- --output-dir ./packages/meeemor-subgraph/generated",
-        "cwd": "./packages/meeemor-subgraph"
+        "command": "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated",
+        "cwd": "./packages/subgraph"
       }
     },
     "deploy": {
@@ -45,19 +45,19 @@
       "options": {
         "parallel": false,
         "commands": [
-          "npm run mustache ./contracts.w3q.json --tpl ./packages/meeemor-subgraph/subgraph.template.yaml ./packages/meeemor-subgraph/subgraph.yaml",
-          "npm run graph codegen ./packages/meeemor-subgraph/subgraph.yaml -- --output-dir ./packages/meeemor-subgraph/generated",
-          "npm run graph build ./packages/meeemor-subgraph/subgraph.yaml",
-          "npm run graph deploy 3VLINC/poap-w3q-subgraph ./packages/meeemor-subgraph/subgraph.yaml -- --ipfs http://localhost:5001 --node http://localhost:8020 --version-label 0.2.3"
+          "npm run mustache ./contracts.w3q.json --tpl ./packages/subgraph/subgraph.template.yaml ./packages/subgraph/subgraph.yaml",
+          "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated",
+          "npm run graph build ./packages/subgraph/subgraph.yaml",
+          "npm run graph deploy 3VLINC/poap-w3q-subgraph ./packages/subgraph/subgraph.yaml -- --ipfs http://localhost:5001 --node http://localhost:8020 --version-label 0.2.3"
         ],
-        "cwd": "./packages/meeemor-subgraph"
+        "cwd": "./packages/subgraph"
       }
     },
     "remove": {
       "executor": "nx:run-commands",
       "options": {
         "command": "npm run graph remove -- 3VLINC/poap-w3q-subgraph --node http://localhost:8020",
-        "cwd": "./packages/meeemor-subgraph"
+        "cwd": "./packages/subgraph"
       }
     }
   },

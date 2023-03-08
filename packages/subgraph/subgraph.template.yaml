@@ -5,29 +5,6 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Poap
-    network: mainnet
-    source:
-      address: "{{ poap }}"
-      abi: Poap
-      startBlock: 5453900
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.6
-      language: wasm/assemblyscript
-      entities:
-        - EventToken
-        - Transfer
-      abis:
-        - name: Poap
-          file: ./abis/XPoap.json
-      eventHandlers:
-        - event: EventToken(indexed uint256,uint256)
-          handler: handleEventToken
-        - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-      file: ./src/mapping.ts
-  - kind: ethereum/contract
     name: MeeemorDeployer
     network: mainnet
     source:
