@@ -16,7 +16,7 @@ Meeemor is an app that is built on POAP.
 1. Run `nvm use 14.18.0`
 1. Run `npm install`
 1. Run `docker-compose up`
-1. Create `contracts.w3q.json` in root with contract addresses `{"meeemorDeploy":"<ADDRESS>","poap":"<ADDRESS>"}`
+1. Create `contracts.w3q.json` in root with contract addresses `{"meeemorDeploy":"<ADDRESS>"}`
 1. Run `nx create:subgraph:poap meeemor-subgraph`
 1. Run `nx deploy:subgraph:poap meeemor-subgraph`
 1. Run `nx serve frontend`
@@ -24,11 +24,6 @@ Meeemor is an app that is built on POAP.
 # Deploying
 1. Set your private key in .env.local `PRIVATE_KEY=<INSERT_KEY_HERE>`
 1. Run `nx deploy backend`
-
-
-# Challenges
-- Wallet connect buffer not defined version compatibility
-- Incompatibility of wallet connect and webpack version bundled with @nrwl. Had to inject node dependencies into webpack
 
 
 # Next Steps

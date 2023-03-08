@@ -32,14 +32,10 @@ services:
     image: postgres
     ports:
       - '5432:5432'
-    command:
-      [
-        'postgres',
-        '-cshared_preload_libraries=pg_stat_statements',
-        '-cmax_connections=200',
-      ]
+    command: 'postgres'
     environment:
       POSTGRES_MULTIPLE_DATABASES: 'graph-node,explorer'
       POSTGRES_USER: graph-node
       POSTGRES_PASSWORD: let-me-in
       PGDATA: /tmp
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
