@@ -41,3 +41,4 @@ Thumbs.db
 .openzeppelin/.session
 .env.local
 contracts.w3q.json
+build
