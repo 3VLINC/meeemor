@@ -7,15 +7,13 @@ import { useConfig } from '../../../../shared/Config/Config';
 import {
   useContractWrite,
   usePrepareContractWrite,
-  usePrepareSendTransaction,
-  useSendTransaction,
+  useWaitForTransaction,
 } from 'wagmi';
 import { useDebounce } from 'use-debounce';
 import { ExistingPoap } from './components/ExistingPoap/ExistingPoap';
 import { NewPoap } from './components/NewPoap';
 import { Mode } from './components/Mode';
-import { useMemo } from 'react';
-import { BigNumber, utils, constants } from 'ethers';
+import { useEffect, useMemo } from 'react';
 import { parseEther } from 'ethers/lib/utils';
 
 const StyledForm = styled(Form)`
@@ -64,10 +62,7 @@ export const CreateForm = () => {
   );
 };
 
-const Inside: React.FC<FormikProps<CreateProps>> = ({
-  values,
-  handleReset,
-}) => {
+const Inside: React.FC<FormikProps<CreateProps>> = ({ values }) => {
   const { contracts } = useConfig();
 
   const debouncedEventName = useDebounce(values.eventName, 500);
@@ -96,7 +91,19 @@ const Inside: React.FC<FormikProps<CreateProps>> = ({
     },
   });
   console.log('rendering');
-  const { isLoading, write } = useContractWrite(config);
+  const { write, data, error, status } = useContractWrite(config);
+  const {
+    isLoading,
+    isSuccess,
+    data: receipt,
+  } = useWaitForTransaction({
+    hash: data?.hash,
+  });
+  console.log('receipt is', receipt);
+  console.log('data', data);
+  console.log('error', error);
+  console.log('status', status);
+
   const handleSubmit = () => {
     console.log('submitting');
     write?.();
@@ -134,7 +141,7 @@ const Inside: React.FC<FormikProps<CreateProps>> = ({
       <Button
         disabled={isLoading || !write}
         type="submit"
-        onSubmit={handleSubmit}
+        onClick={handleSubmit}
       >
         Submit
       </Button>
