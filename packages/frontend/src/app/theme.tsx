@@ -33,15 +33,36 @@ export const theme = createTheme({
         },
       },
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          padding: '5px 4px 7.5px 4px',
+        },
+      },
+    },
     MuiInputBase: {
       styleOverrides: {
-        root: {},
+        root: {
+          border: '4px solid #FFFFFF',
+          borderRadius: '4px',
+          padding: '9px',
+          width: '100%',
+          backgroundColor: 'transparent',
+          '&:hover': {
+            '&:before': {
+              borderBottom: '1px !important',
+            },
+          },
+        },
+        input: {
+          padding: '7.5px 4px',
+        },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: '#FFFFFF',
+          border: 'none ',
         },
       },
     },
