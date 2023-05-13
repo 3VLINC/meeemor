@@ -13,6 +13,8 @@ async function main() {
     .connect(contractOwner)
     .deploy();
 
+  await meeemorDeployInstance.deployed();
+
   const stream = createWriteStream(
     resolve(`../../contracts.${network.name}.json`)
   );

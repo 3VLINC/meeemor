@@ -5,18 +5,18 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: MeeemorDeployer
+    name: MEEEMORDeploy
     network: mainnet
     source:
       address: '{{ meeemorDeploy }}'
       abi: MEEEMORDeploy
-      startBlock: 5508966
+      startBlock: 6535444
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - EventCreated
+        - MeeemorEvent
       abis:
         - name: MEEEMORDeploy
           file: ../backend/artifacts/contracts/MEEEMORDeploy.sol/MEEEMORDeploy.json

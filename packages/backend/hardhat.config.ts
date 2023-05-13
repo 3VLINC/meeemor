@@ -33,6 +33,7 @@ module.exports = {
     w3q: {
       url: 'https://galileo.web3q.io:8545',
       accounts: [process.env.PRIVATE_KEY],
+      gasPrice: 30000000000, // this is 30 Gwei
     },
   },
 };

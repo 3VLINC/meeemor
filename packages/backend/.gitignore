@@ -1,4 +1,5 @@
 .env
+*.flat.sol
 coverage
 coverage.json
 typechain

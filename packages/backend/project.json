@@ -32,6 +32,13 @@
         "cwd": "./packages/backend"
       }
     },
+    "flatten": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hardhat flatten ./contracts/MEEEMORDeploy.sol > ./contracts/MEEEMORDeploy.flat.sol",
+        "cwd": "./packages/backend"
+      }
+    },
     "deploy": {
       "executor": "nx:run-commands",
       "options": {

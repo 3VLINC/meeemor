@@ -13,6 +13,7 @@ export function handleEventCreated(ev: EventCreatedEvent): void {
     event = new MeeemorEvent(ev.params.eventId.toString());
     event.bounty = ev.params.bounty;
     event.name = ev.params.name;
+    event.created = ev.block.timestamp;
     event.save();
     log.debug('handleEventCreated: event saved', []);
   }
