@@ -1,15 +1,24 @@
 import { ethers } from 'hardhat';
-import { MEEEMORDeploy__factory } from '../../../typechain-types';
+import {
+  MeeemorDeploy__factory,
+  Meeemor__factory,
+} from '../../../typechain-types';
 
 export interface E2EContractsProp {
-  meeemorDeploy: MEEEMORDeploy__factory;
+  meeemorDeploy: MeeemorDeploy__factory;
+  meeemor: Meeemor__factory;
 }
 export const getContracts = async (): Promise<E2EContractsProp> => {
   const meeemorDeploy = (await ethers.getContractFactory(
-    'MEEEMORDeploy'
-  )) as MEEEMORDeploy__factory;
+    'MeeemorDeploy'
+  )) as MeeemorDeploy__factory;
+
+  const meeemor = (await ethers.getContractFactory(
+    'Meeemor'
+  )) as Meeemor__factory;
 
   return {
     meeemorDeploy,
+    meeemor,
   };
 };

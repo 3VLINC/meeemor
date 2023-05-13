@@ -35,7 +35,7 @@
     "flatten": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "hardhat flatten ./contracts/MEEEMORDeploy.sol > ./contracts/MEEEMORDeploy.flat.sol",
+        "command": "hardhat flatten ./contracts/MeeemorDeploy.sol > ./contracts/MeeemorDeploy.flat.sol",
         "cwd": "./packages/backend"
       }
     },

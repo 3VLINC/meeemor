@@ -21,9 +21,9 @@ interface ConfigProps {
 
 const initial: ConfigProps = {
   bounty: {
-    min: 1,
+    min: 0.1,
     max: 20,
-    stepIncrement: 0.5,
+    stepIncrement: 0.1,
     defaultValue: 3,
   },
   contracts: {

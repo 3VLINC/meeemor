@@ -6,7 +6,7 @@ async function main() {
   const accounts = await ethers.getSigners();
   const contractOwner = accounts[0];
   const meeemorDeployContractFactory = await ethers.getContractFactory(
-    'MEEEMORDeploy'
+    'MeeemorDeploy'
   );
 
   const meeemorDeployInstance = await meeemorDeployContractFactory

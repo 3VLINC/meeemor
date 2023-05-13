@@ -5,11 +5,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: MEEEMORDeploy
+    name: MeeemorDeploy
     network: mainnet
     source:
       address: '{{ meeemorDeploy }}'
-      abi: MEEEMORDeploy
+      abi: MeeemorDeploy
       startBlock: 6535444
     mapping:
       kind: ethereum/events
@@ -18,8 +18,8 @@ dataSources:
       entities:
         - MeeemorEvent
       abis:
-        - name: MEEEMORDeploy
-          file: ../backend/artifacts/contracts/MEEEMORDeploy.sol/MEEEMORDeploy.json
+        - name: MeeemorDeploy
+          file: ../backend/artifacts/contracts/MeeemorDeploy.sol/MeeemorDeploy.json
       eventHandlers:
         - event: EventCreated(uint256,string,uint256)
           handler: handleEventCreated

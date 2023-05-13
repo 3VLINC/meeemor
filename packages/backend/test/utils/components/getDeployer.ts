@@ -1,9 +1,9 @@
 import { Signer } from 'ethers';
-import { MEEEMORDeploy } from '../../../typechain-types';
+import { MeeemorDeploy } from '../../../typechain-types';
 import { E2EContractsProp, getContracts } from './getContracts';
 
 export interface DeployerOutput {
-  meeemorDeploy: MEEEMORDeploy;
+  meeemorDeploy: MeeemorDeploy;
   contracts: E2EContractsProp;
 }
 export const getDeployer =

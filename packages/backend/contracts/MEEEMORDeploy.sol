@@ -8,13 +8,13 @@ import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
-import './MEEEMOR.sol';
+import './Meeemor.sol';
 import './Poap.sol';
 
-contract MEEEMORDeploy is Ownable {
+contract MeeemorDeploy is Ownable {
     using Counters for Counters.Counter;
 
-    Counters.Counter private _eventCounter;
+    Counters.Counter public eventCounter;
 
     struct PoapEvent {
         address addr;
@@ -25,30 +25,21 @@ contract MEEEMORDeploy is Ownable {
 
     Poap public poap;
 
-    mapping(uint256 => MEEME) private _events;
+    mapping(uint256 => Meeemor) public events;
 
     event EventCreated(uint256 eventId, string name, uint256 bounty);
 
-    event AttendeedVoted(
-        address indexed addr,
-        uint256 eventId,
-        uint256 tokenId
-    );
+    event AttendeeVoted(address indexed addr, uint256 eventId, uint256 tokenId);
 
     constructor() Ownable() {
         poap = new Poap();
     }
 
     function initialize(string calldata name) external payable {
-        uint256 eventId = _eventCounter.current();
-        _eventCounter.increment();
-        _events[eventId] = new MEEME{value: msg.value}(address(this));
+        uint256 eventId = eventCounter.current();
+        eventCounter.increment();
+        events[eventId] = new Meeemor{value: msg.value}(address(poap));
         poap.mintToken(eventId, msg.sender);
         emit EventCreated(eventId, name, msg.value);
-    }
-
-    function vote(uint256 eventId, uint256 tokenId) external {
-        _events[eventId].vote(tokenId);
-        emit AttendeedVoted(msg.sender, eventId, tokenId);
     }
 }

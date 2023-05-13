@@ -6,10 +6,18 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
+import '@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
+import 'hardhat/console.sol';
 
-contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
+contract Meeemor is
+    ERC721,
+    ERC721Enumerable,
+    ERC721URIStorage,
+    IERC721Receiver,
+    Ownable
+{
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
@@ -41,12 +49,17 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     event MemeCreated(address indexed addr, uint256 tokenId);
 
     constructor(address _poapAddr) payable ERC721('MEEEMOR', 'MMR') {
-        require(
-            msg.value >= 1 ether,
-            'Bounty amount must be greater than 1 ETH'
-        );
         poapAddress = _poapAddr;
         bountyAmount = msg.value;
+    }
+
+    function onERC721Received(
+        address,
+        address,
+        uint256,
+        bytes calldata
+    ) external pure returns (bytes4) {
+        return IERC721Receiver.onERC721Received.selector;
     }
 
     function startTimer(uint256 _duration) external {
@@ -102,25 +115,28 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return poapAddress;
     }
 
-    function createMeme(string memory uri) public returns (uint256) {
+    function createMeme(string memory uri) public {
+        console.log('Gets here 1');
         require(checkEligibility(msg.sender), 'Mint your POAP token first');
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(address(this), tokenId);
         _setTokenURI(tokenId, uri);
 
-        return tokenId;
+        emit MemeCreated(address(this), tokenId);
     }
 
-    function checkEligibility(address _to)
-        internal
-        view
-        returns (bool isEligible)
-    {
+    function checkEligibility(
+        address _to
+    ) internal view returns (bool isEligible) {
         require(_to != address(0), 'Cannot be zero address');
-
+        console.log('Gets here');
         IERC721 token = IERC721(poapAddress);
+        console.log(poapAddress);
+        console.log('Gets here 2');
+        console.log(_to);
         uint256 tokenBalance = token.balanceOf(_to);
+        console.log('Gets here 3');
         if (tokenBalance == 1) {
             isEligible = true;
         }
@@ -165,11 +181,9 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         return _tokenVotes[tokenId];
     }
 
-    function getVoteAddress(uint256 tokenId)
-        public
-        view
-        returns (address[] memory)
-    {
+    function getVoteAddress(
+        uint256 tokenId
+    ) public view returns (address[] memory) {
         return _voters[tokenId];
     }
 
@@ -192,28 +206,21 @@ contract MEEME is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         super._afterTokenTransfer(from, to, tokenId, batchSize);
     }
 
-    function _burn(uint256 tokenId)
-        internal
-        override(ERC721, ERC721URIStorage)
-    {
+    function _burn(
+        uint256 tokenId
+    ) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721Enumerable)
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view override(ERC721, ERC721Enumerable) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 }

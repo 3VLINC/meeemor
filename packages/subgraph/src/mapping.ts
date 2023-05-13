@@ -1,4 +1,4 @@
-import { EventCreated as EventCreatedEvent } from '../generated/MeeemorDeployer/MEEEMORDeploy';
+import { EventCreated as EventCreatedEvent } from '../generated/MeeemorDeployer/MeeemorDeploy';
 
 import { MeeemorEvent } from '../generated/schema';
 import { log } from '@graphprotocol/graph-ts';
