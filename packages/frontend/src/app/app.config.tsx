@@ -20,7 +20,7 @@ export const web3q: Chain = {
 };
 
 export const hardhat: Chain = {
-  id: 1337,
+  id: 31337,
   name: 'Hardhat',
   network: 'hardhat',
   nativeCurrency: {

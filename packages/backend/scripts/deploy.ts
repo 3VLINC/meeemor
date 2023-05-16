@@ -13,7 +13,9 @@ async function main() {
     .connect(contractOwner)
     .deploy();
 
-  await meeemorDeployInstance.deployed();
+  const {
+    deployTransaction: { blockNumber },
+  } = await meeemorDeployInstance.deployed();
 
   const stream = createWriteStream(
     resolve(`../../contracts.${network.name}.json`)
@@ -21,12 +23,20 @@ async function main() {
 
   stream.write(
     JSON.stringify({
-      meeemorDeploy: meeemorDeployInstance.address,
+      meeemorDeploy: {
+        address: meeemorDeployInstance.address,
+        blockNumber,
+      },
     })
   );
 
   stream.close();
-  console.log('MeeemorDeploy deployed to:', meeemorDeployInstance.address);
+  console.log(
+    'MeeemorDeploy deployed to:',
+    meeemorDeployInstance.address,
+    'at block',
+    blockNumber
+  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere

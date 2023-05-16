@@ -25,10 +25,17 @@
         }
       }
     },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose -f docker-compose.yaml -f docker-compose.{args.network}.yaml up",
+        "cwd": "./packages/subgraph"
+      }
+    },
     "create": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm run graph create -- 3VLINC/poap-w3q-subgraph -g http://localhost:8020 ",
+        "command": "npm run graph create -- 3VLINC/meeemor -g http://localhost:8020 ",
         "cwd": "./packages/subgraph"
       }
     },
@@ -37,8 +44,13 @@
       "options": {
         "parallel": false,
         "commands": [
-          "npm run mustache ./contracts.w3q.json --tpl ./packages/subgraph/subgraph.template.yaml ./packages/subgraph/subgraph.yaml",
-          "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated"
+          {
+            "command": "npm run mustache ./contracts.{args.network}.json --tpl ./packages/subgraph/subgraph.template.yaml ./packages/subgraph/subgraph.yaml"
+          },
+          {
+            "command": "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated",
+            "forwardAllArgs": false
+          }
         ],
         "cwd": "./packages/subgraph"
       }
@@ -48,10 +60,21 @@
       "options": {
         "parallel": false,
         "commands": [
-          "npm run mustache ./contracts.w3q.json --tpl ./packages/subgraph/subgraph.template.yaml ./packages/subgraph/subgraph.yaml",
-          "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated",
-          "npm run graph build ./packages/subgraph/subgraph.yaml",
-          "npm run graph deploy 3VLINC/poap-w3q-subgraph ./packages/subgraph/subgraph.yaml -- --ipfs http://localhost:5001 --node http://localhost:8020 --version-label 0.2.3"
+          {
+            "command": "npm run mustache ./contracts.{args.network}.json --tpl ./packages/subgraph/subgraph.template.yaml ./packages/subgraph/subgraph.yaml"
+          },
+          {
+            "command": "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npm run graph build ./packages/subgraph/subgraph.yaml",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npm run graph deploy 3VLINC/meeemor ./packages/subgraph/subgraph.yaml -- --ipfs http://localhost:5001 --node http://localhost:8020 --version-label 0.2.3",
+            "forwardAllArgs": false
+          }
         ],
         "cwd": "./packages/subgraph"
       }
@@ -59,7 +82,7 @@
     "remove": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm run graph remove -- 3VLINC/poap-w3q-subgraph --node http://localhost:8020",
+        "command": "npm run graph remove -- 3VLINC/meeemor --node http://localhost:8020",
         "cwd": "./packages/subgraph"
       }
     }

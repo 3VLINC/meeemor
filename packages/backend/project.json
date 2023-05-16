@@ -45,6 +45,13 @@
         "command": "hardhat run ./scripts/deploy.ts",
         "cwd": "./packages/backend"
       }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hardhat node --network hardhat --hostname 0.0.0.0",
+        "cwd": "./packages/backend"
+      }
     }
   },
   "tags": []

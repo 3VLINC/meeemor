@@ -1,0 +1,5 @@
+version: '3'
+services:
+  graph-node:
+    environment:
+      ethereum: 'mainnet:https://galileo.web3q.io:8545'

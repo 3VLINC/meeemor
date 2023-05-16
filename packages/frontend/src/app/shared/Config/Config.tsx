@@ -41,12 +41,12 @@ export const Config: React.FC<PropsWithChildren> = (props) => {
 
   let address = '0x' as `0x${string}`;
   if (chain?.network === 'web3q-galileo') {
-    address = w3q.meeemorDeploy as `0x${string}`;
+    address = w3q.meeemorDeploy.address as `0x${string}`;
   } else if (chain?.network === 'hardhat') {
-    address = hardhat.meeemorDeploy as `0x${string}`;
+    address = hardhat.meeemorDeploy.address as `0x${string}`;
   }
   console.log(chain?.network, 'network!');
-  console.log(address);
+  console.log(address, 'address!');
   return (
     <Context.Provider
       value={{

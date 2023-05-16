@@ -8,9 +8,9 @@ dataSources:
     name: MeeemorDeploy
     network: mainnet
     source:
-      address: '{{ meeemorDeploy }}'
+      address: '{{ meeemorDeploy.address }}'
       abi: MeeemorDeploy
-      startBlock: 6535444
+      startBlock: {{ meeemorDeploy.blockNumber }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

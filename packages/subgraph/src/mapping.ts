@@ -3,6 +3,7 @@ import { MeeemorEvent } from '../generated/schema';
 import { log } from '@graphprotocol/graph-ts';
 
 export function handleEventCreated(ev: EventCreatedEvent): void {
+  log.info('Enters handleEventCreated handler', []);
   log.debug('handleEventCreated: {}', [ev.params.eventId.toString()]);
   let event = MeeemorEvent.load(ev.params.eventId.toString());
 

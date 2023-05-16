@@ -25,14 +25,14 @@ const initialize =
   };
 
 describe('Meeemor', async function () {
-  it('should initialize correctly', async () =>
+  it.only('should initialize correctly', async () =>
     harness(initialize()).then(async ({ users, expect, meeemorDeploy }) => {
       const result = await meeemorDeploy
         .connect(users.owner)
         .initialize('Eth Denver', { value: parseEther('3') })
         .then((tx) => tx.wait())
         .then(findEmittedEvent<EventCreatedEvent>('EventCreated'));
-
+      console.log(result.args);
       expect(result.args.name).to.eql('Eth Denver');
     }));
 
