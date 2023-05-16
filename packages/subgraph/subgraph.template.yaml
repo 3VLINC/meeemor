@@ -21,6 +21,6 @@ dataSources:
         - name: MeeemorDeploy
           file: ../backend/artifacts/contracts/MeeemorDeploy.sol/MeeemorDeploy.json
       eventHandlers:
-        - event: EventCreated(uint256,string,uint256)
+        - event: EventCreated(uint256,string,uint256,address)
           handler: handleEventCreated
       file: ./src/mapping.ts

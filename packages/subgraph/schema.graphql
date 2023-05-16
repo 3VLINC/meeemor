@@ -3,4 +3,5 @@ type MeeemorEvent @entity {
   name: String!
   bounty: BigInt!
   created: BigInt!
+  owner: Bytes!
 }

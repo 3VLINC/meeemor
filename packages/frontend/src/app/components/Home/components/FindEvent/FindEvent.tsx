@@ -24,7 +24,7 @@ export const FindEvent = () => {
     `,
     {}
   );
-  console.log(events);
+
   const myActiveEvents = (data?.account?.tokens || []).map((token: any) => ({
     id: token.id,
     label: eventName(token.id),

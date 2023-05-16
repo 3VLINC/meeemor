@@ -36,7 +36,10 @@
       "executor": "nx:run-commands",
       "options": {
         "parallel": false,
-        "command": "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated",
+        "commands": [
+          "npm run mustache ./contracts.w3q.json --tpl ./packages/subgraph/subgraph.template.yaml ./packages/subgraph/subgraph.yaml",
+          "npm run graph codegen ./packages/subgraph/subgraph.yaml -- --output-dir ./packages/subgraph/generated"
+        ],
         "cwd": "./packages/subgraph"
       }
     },

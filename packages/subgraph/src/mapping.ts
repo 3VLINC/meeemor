@@ -1,5 +1,4 @@
-import { EventCreated as EventCreatedEvent } from '../generated/MeeemorDeployer/MeeemorDeploy';
-
+import { EventCreated as EventCreatedEvent } from '../generated/MeeemorDeploy/MeeemorDeploy';
 import { MeeemorEvent } from '../generated/schema';
 import { log } from '@graphprotocol/graph-ts';
 
@@ -14,6 +13,7 @@ export function handleEventCreated(ev: EventCreatedEvent): void {
     event.bounty = ev.params.bounty;
     event.name = ev.params.name;
     event.created = ev.block.timestamp;
+    event.owner = ev.params.owner;
     event.save();
     log.debug('handleEventCreated: event saved', []);
   }
