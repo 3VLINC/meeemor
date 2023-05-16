@@ -7,22 +7,18 @@ import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol';
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
-import 'hardhat/console.sol';
 
 contract Meeemor is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage,
-    IERC721Receiver,
-    Ownable
+    IERC721Receiver
 {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
 
-    address private poapAddress;
     uint256 private duration;
     uint256 private bountyAmount;
     uint256 private winnerTokenId;
@@ -30,27 +26,37 @@ contract Meeemor is
     uint256 private startTime;
     bool private timerStarted;
     uint256 private endTime;
+    address private owner;
 
-    address[] private voteWinners;
-    mapping(address => bool) _eligible;
-    uint256 private voteAward;
-
-    event TimerStarted(uint256 startTime);
-    event TimerEnded(uint256 endTime);
+    event BountyStarted(uint256 startTime);
+    event BountyEnded(uint256 endTime);
     event BountyAwarded(address winner, uint256 amount);
+    event MemeCreated(address indexed addr, uint256 tokenId);
+    event Voted(address indexed addr, uint256 tokenId);
 
     mapping(uint256 => uint256) private _tokenVotes;
     mapping(uint256 => address) private _creators;
     mapping(uint256 => address[]) private _voters;
 
     mapping(address => bool) public _voted;
-    // mapping(address => mapping(uint256=>bool)) public votes;
 
-    event MemeCreated(address indexed addr, uint256 tokenId);
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
 
-    constructor(address _poapAddr) payable ERC721('MEEEMOR', 'MMR') {
-        poapAddress = _poapAddr;
+    modifier checkEligibility(address _to) {
+        require(_to != address(0), 'Cannot be zero address');
+        _;
+    }
+
+    function _checkOwner() internal view virtual {
+        require(owner == msg.sender, 'Ownable: caller is not the owner');
+    }
+
+    constructor(address _owner) payable ERC721('MEEEMOR', 'MMR') {
         bountyAmount = msg.value;
+        owner = _owner;
     }
 
     function onERC721Received(
@@ -62,14 +68,31 @@ contract Meeemor is
         return IERC721Receiver.onERC721Received.selector;
     }
 
-    function startTimer(uint256 _duration) external {
+    function begin(uint256 _duration) external onlyOwner {
         require(!timerStarted, 'Timer already started');
 
         startTime = block.timestamp;
         endTime = startTime + _duration;
         timerStarted = true;
 
-        emit TimerStarted(startTime);
+        emit BountyStarted(startTime);
+    }
+
+    function end() external onlyOwner {
+        require(timerStarted, 'Timer not started');
+        require(block.timestamp >= endTime, 'Timer not ended');
+
+        timerStarted = false;
+
+        emit BountyEnded(endTime);
+
+        uint256 tokenIndex = findLargestIndex();
+
+        address winner = _creators[tokenIndex];
+
+        payable(winner).transfer(bountyAmount);
+
+        emit BountyAwarded(winner, bountyAmount);
     }
 
     function getRemainingTime() public view returns (uint256) {
@@ -81,67 +104,14 @@ contract Meeemor is
         }
     }
 
-    function endBounty() external onlyOwner {
-        require(timerStarted, 'Timer not started');
-        require(block.timestamp >= endTime, 'Timer not ended');
-
-        timerStarted = false;
-
-        emit TimerEnded(endTime);
-
-        uint256 awardAmount = (bountyAmount * 50) / 100;
-        uint256 tokenIndex = findLargestIndex();
-
-        address winner = _creators[tokenIndex];
-        voteWinners = _voters[tokenIndex];
-
-        payable(winner).transfer(awardAmount);
-
-        bountyAmount -= awardAmount;
-        emit BountyAwarded(winner, awardAmount);
-
-        voteAward = (bountyAmount * 95) / 100;
-
-        for (uint256 i = 0; i < voteWinners.length; i++) {
-            _eligible[voteWinners[i]] = true;
-        }
-    }
-
-    function getBountyAmount() external view returns (uint256) {
-        return bountyAmount;
-    }
-
-    function getPoapContract() public view virtual returns (address) {
-        return poapAddress;
-    }
-
-    function createMeme(string memory uri) public {
-        console.log('Gets here 1');
-        require(checkEligibility(msg.sender), 'Mint your POAP token first');
+    function createMeme(string memory uri) public checkEligibility(msg.sender) {
         uint256 tokenId = _tokenIdCounter.current();
+        _creators[tokenId] = msg.sender;
         _tokenIdCounter.increment();
         _safeMint(address(this), tokenId);
         _setTokenURI(tokenId, uri);
 
         emit MemeCreated(address(this), tokenId);
-    }
-
-    function checkEligibility(
-        address _to
-    ) internal view returns (bool isEligible) {
-        require(_to != address(0), 'Cannot be zero address');
-        console.log('Gets here');
-        IERC721 token = IERC721(poapAddress);
-        console.log(poapAddress);
-        console.log('Gets here 2');
-        console.log(_to);
-        uint256 tokenBalance = token.balanceOf(_to);
-        console.log('Gets here 3');
-        if (tokenBalance == 1) {
-            isEligible = true;
-        }
-
-        return isEligible;
     }
 
     function vote(uint256 tokenId) public {
@@ -152,6 +122,7 @@ contract Meeemor is
         _tokenVotes[tokenId] += 1;
 
         _voters[tokenId].push(msg.sender);
+        emit Voted(msg.sender, tokenId);
     }
 
     function findLargestIndex() public view returns (uint256) {
@@ -168,13 +139,6 @@ contract Meeemor is
         }
 
         return largestIndex;
-    }
-
-    function voterClaim() public {
-        require(_eligible[msg.sender], 'Account is not eligible');
-        require(bountyAmount > 0, 'No bounty remains');
-        payable(msg.sender).transfer(voteAward);
-        bountyAmount -= voteAward;
     }
 
     function getTokenVotes(uint256 tokenId) public view returns (uint256) {

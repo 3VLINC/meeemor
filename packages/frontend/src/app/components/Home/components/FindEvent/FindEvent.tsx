@@ -4,12 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import { useAllEvents } from '../../../../hooks/useAllEvents';
 import { useMocks } from '../../../../shared/Mocks/Mocks';
+import { gql, useQuery } from '@apollo/client';
 
 export const FindEvent = () => {
   const navigate = useNavigate();
   const { address } = useAccount();
   const { data } = useAllEvents(address || '');
   const { eventName } = useMocks();
+  const { data: events } = useQuery(
+    gql`
+      query MyEvents {
+        meeemorEvents {
+          id
+          name
+          bounty
+          created
+        }
+      }
+    `,
+    {}
+  );
+  console.log(events);
   const myActiveEvents = (data?.account?.tokens || []).map((token: any) => ({
     id: token.id,
     label: eventName(token.id),

@@ -3,12 +3,16 @@ import { ethers } from 'hardhat';
 
 export interface UsersProp {
   owner: SignerWithAddress;
+  voter: SignerWithAddress;
+  creator: SignerWithAddress;
 }
 
 export const getUsers = async (): Promise<UsersProp> => {
-  const [owner] = await ethers.getSigners();
+  const [owner, voter, creator] = await ethers.getSigners();
 
   return {
     owner,
+    voter,
+    creator,
   };
 };
